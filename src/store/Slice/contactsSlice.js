@@ -39,15 +39,6 @@ const contactsSlice = createSlice({
         state.error = error;
       });
   },
-  // reducers: {
-  //   // createContact: (state, { payload }) => {
-  //   //   state.contacts.push(payload);
-  //   // },
-  //   // deleteContact: (state, { payload }) => {
-  //   //   state.contacts = state.contacts.filter((el) => el.id !== payload);
-  //   // },
-  // },
 });
 
 export const contactsSliceReducer = contactsSlice.reducer;
-// export const { createContact, deleteContact } = contactsSlice.actions;

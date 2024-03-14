@@ -3,7 +3,10 @@ import css from "./ContactRender.module.css";
 // import { deleteContact } from "../store/Slice/contactsSlice";
 import { getContacts, getFilter } from "../store/selectors";
 import { deleteContact } from "../Api/api";
-import { deleteContactThunk } from "../store/Slice/contactsSlice";
+import {
+  deleteContactThunk,
+  getContactsThunk,
+} from "../store/Slice/contactsSlice";
 
 export const ContactRender = () => {
   const contacts = useSelector(getContacts);
@@ -14,6 +17,9 @@ export const ContactRender = () => {
   const handleDelete = (id) => {
     console.log("elID", id);
     dispatch(deleteContactThunk(id));
+    setTimeout(() => {
+      dispatch(getContactsThunk());
+    }, 1000);
   };
 
   const contactFilter = () => {

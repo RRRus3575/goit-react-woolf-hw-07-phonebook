@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import css from "./Form.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
-// import { createContact } from "../store/Slice/contactsSlice";
-import { nanoid } from "@reduxjs/toolkit";
 import { getContacts } from "../store/selectors";
 import {
   getContactsThunk,
@@ -36,18 +34,15 @@ export const Form = () => {
       postContactThunk({
         name: name,
         number: number,
-        // id: nanoid(),
       })
     );
 
     e.target.reset();
 
-    dispatch(getContactsThunk());
+    setTimeout(() => {
+      dispatch(getContactsThunk());
+    }, 1000);
   };
-
-  // useEffect(() => {
-  //   dispatch(getContactsThunk());
-  // }, [name]);
 
   const { form, submit } = css;
   return (

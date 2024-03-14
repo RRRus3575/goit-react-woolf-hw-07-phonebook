@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import css from "./Input.module.css";
 import { filterContacts } from "../store/Slice/filterSlice";
 
-export const Input = ({ label, name, value, type, onChange }) => {
+export const Input = ({ label, name, value, type }) => {
   const dispatch = useDispatch();
 
   const handleSearch = ({ target: { value: value } }) => {
