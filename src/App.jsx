@@ -2,13 +2,18 @@ import { Form } from "./Form/Form";
 import { Input } from "./inputs/Input";
 import { ContactRender } from "./ContactRender/ConstactRender";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getContactsThunk } from "./store/Slice/contactsSlice";
 
+import { getIsLoading } from "./store/selectors";
+import LoaderExampleText from "./Loaders/LoaderExampleText";
+
 export const App = () => {
+  const isLoading = useSelector(getIsLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(isLoading);
     dispatch(getContactsThunk());
   }, [dispatch]);
 
@@ -37,6 +42,7 @@ export const App = () => {
             label={"Find contacts by name"}
           />
           <ul>
+            {isLoading && <LoaderExampleText />}
             <ContactRender />
           </ul>
         </div>
