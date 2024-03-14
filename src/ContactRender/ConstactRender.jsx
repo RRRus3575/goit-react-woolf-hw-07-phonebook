@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./ContactRender.module.css";
-import { deleteContact } from "../store/Slice/contactsSlice";
+// import { deleteContact } from "../store/Slice/contactsSlice";
 import { getContacts, getFilter } from "../store/selectors";
+import { deleteContact } from "../Api/api";
+import { deleteContactThunk } from "../store/Slice/contactsSlice";
 
 export const ContactRender = () => {
   const contacts = useSelector(getContacts);
@@ -9,8 +11,9 @@ export const ContactRender = () => {
 
   const dispatch = useDispatch();
 
-  const handleDelete = (nameEl) => {
-    dispatch(deleteContact(nameEl));
+  const handleDelete = (id) => {
+    console.log("elID", id);
+    dispatch(deleteContactThunk(id));
   };
 
   const contactFilter = () => {
@@ -26,7 +29,7 @@ export const ContactRender = () => {
       <button
         name={el.id}
         onClick={(e) => {
-          handleDelete(e.target.name);
+          handleDelete(el.id);
         }}
         className={css.delete}
       >

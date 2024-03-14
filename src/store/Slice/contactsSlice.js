@@ -1,0 +1,53 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { deleteContact, getContacts, postContact } from "../../Api/api";
+
+export const getContactsThunk = createAsyncThunk("AllContacts", async () => {
+  const data = await getContacts();
+  console.log("get", data);
+  return data;
+});
+export const postContactThunk = createAsyncThunk("addContact", async (data) => {
+  postContact(data);
+});
+
+export const deleteContactThunk = createAsyncThunk(
+  "deleteContact",
+  async (id) => {
+    deleteContact(id);
+  }
+);
+
+const contactsSlice = createSlice({
+  name: "contacts",
+  initialState: {
+    contacts: [],
+    isLoading: false,
+    error: "",
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getContactsThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = "";
+      })
+      .addCase(getContactsThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.contacts = payload;
+      })
+      .addCase(getContactsThunk.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.error = error;
+      });
+  },
+  // reducers: {
+  //   // createContact: (state, { payload }) => {
+  //   //   state.contacts.push(payload);
+  //   // },
+  //   // deleteContact: (state, { payload }) => {
+  //   //   state.contacts = state.contacts.filter((el) => el.id !== payload);
+  //   // },
+  // },
+});
+
+export const contactsSliceReducer = contactsSlice.reducer;
+// export const { createContact, deleteContact } = contactsSlice.actions;

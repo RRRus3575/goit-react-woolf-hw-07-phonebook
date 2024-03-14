@@ -1,8 +1,17 @@
 import { Form } from "./Form/Form";
 import { Input } from "./inputs/Input";
 import { ContactRender } from "./ContactRender/ConstactRender";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getContactsThunk } from "./store/Slice/contactsSlice";
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
+
   return (
     <div
       style={{

@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./Form.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { createContact } from "../store/Slice/contactsSlice";
+// import { createContact } from "../store/Slice/contactsSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import { getContacts } from "../store/selectors";
+import {
+  getContactsThunk,
+  postContactThunk,
+} from "../store/Slice/contactsSlice";
 
 export const Form = () => {
   const [name, setName] = useState("");
@@ -29,15 +33,21 @@ export const Form = () => {
       return;
     }
     dispatch(
-      createContact({
+      postContactThunk({
         name: name,
         number: number,
-        id: nanoid(),
+        // id: nanoid(),
       })
     );
 
     e.target.reset();
+
+    dispatch(getContactsThunk());
   };
+
+  // useEffect(() => {
+  //   dispatch(getContactsThunk());
+  // }, [name]);
 
   const { form, submit } = css;
   return (
