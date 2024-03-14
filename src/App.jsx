@@ -43,7 +43,7 @@ export const App = () => {
           />
           <ul>
             {isLoading && <LoaderExampleText />}
-            <ContactRender />
+            {!isLoading && <ContactRender />}
           </ul>
         </div>
       </div>
