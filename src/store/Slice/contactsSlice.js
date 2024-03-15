@@ -1,19 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deleteContact, getContacts, postContact } from "../../Api/api";
+import {
+  deleteApiContact,
+  getApiContacts,
+  postApiContact,
+} from "../../Api/api";
 
 export const getContactsThunk = createAsyncThunk("AllContacts", async () => {
-  const data = await getContacts();
-  console.log("get", data);
+  const data = await getApiContacts();
   return data;
 });
 export const postContactThunk = createAsyncThunk("addContact", async (data) => {
-  postContact(data);
+  postApiContact(data);
 });
 
 export const deleteContactThunk = createAsyncThunk(
   "deleteContact",
   async (id) => {
-    deleteContact(id);
+    deleteApiContact(id);
   }
 );
 
@@ -26,7 +29,6 @@ const contactsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
       .addCase(getContactsThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.contacts = payload;

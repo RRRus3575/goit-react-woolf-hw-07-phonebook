@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import css from "./ContactRender.module.css";
 // import { deleteContact } from "../store/Slice/contactsSlice";
 import { getContacts, getFilter } from "../store/selectors";
-import { deleteContact } from "../Api/api";
+
 import {
   deleteContactThunk,
   getContactsThunk,
@@ -36,7 +36,7 @@ export const ContactRender = () => {
           {el.name}: {el.number}
           <button
             name={el.id}
-            onClick={(e) => {
+            onClick={() => {
               handleDelete(el.id);
             }}
             className={css.delete}

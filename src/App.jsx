@@ -14,7 +14,6 @@ export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(isLoading);
     dispatch(getContactsThunk());
   }, [dispatch]);
 
