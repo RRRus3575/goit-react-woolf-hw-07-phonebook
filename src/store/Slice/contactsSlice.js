@@ -26,10 +26,7 @@ const contactsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getContactsThunk.pending, (state) => {
-        state.isLoading = true;
-        state.error = "";
-      })
+
       .addCase(getContactsThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.contacts = payload;
@@ -37,7 +34,14 @@ const contactsSlice = createSlice({
       .addCase(getContactsThunk.rejected, (state, { error }) => {
         state.isLoading = false;
         state.error = error;
-      });
+      })
+      .addMatcher(
+        (action) => action.type.endsWith("pending"),
+        (state) => {
+          state.isLoading = true;
+          state.error = "";
+        }
+      );
   },
 });
 

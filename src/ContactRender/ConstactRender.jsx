@@ -29,18 +29,22 @@ export const ContactRender = () => {
     return cont;
   };
 
-  return contactFilter().map((el) => (
-    <li key={el.id}>
-      {el.name}: {el.number}
-      <button
-        name={el.id}
-        onClick={(e) => {
-          handleDelete(el.id);
-        }}
-        className={css.delete}
-      >
-        Delete
-      </button>
-    </li>
-  ));
+  return (
+    <ul>
+      {contactFilter().map((el) => (
+        <li key={el.id}>
+          {el.name}: {el.number}
+          <button
+            name={el.id}
+            onClick={(e) => {
+              handleDelete(el.id);
+            }}
+            className={css.delete}
+          >
+            Delete
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
 };

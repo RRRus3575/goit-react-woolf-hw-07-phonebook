@@ -5,11 +5,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getContactsThunk } from "./store/Slice/contactsSlice";
 
-import { getIsLoading } from "./store/selectors";
+import { getError, getIsLoading } from "./store/selectors";
 import LoaderExampleText from "./Loaders/LoaderExampleText";
 
 export const App = () => {
   const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,10 +42,9 @@ export const App = () => {
             name={"filter"}
             label={"Find contacts by name"}
           />
-          <ul>
-            {isLoading && <LoaderExampleText />}
-            {!isLoading && <ContactRender />}
-          </ul>
+          {error.length > 0 && <p>{error}</p>}
+          {isLoading && <LoaderExampleText />}
+          {!isLoading && error.length < 1 && <ContactRender />}
         </div>
       </div>
     </div>
