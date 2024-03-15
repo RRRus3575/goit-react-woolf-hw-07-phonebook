@@ -33,10 +33,13 @@ const contactsSlice = createSlice({
         state.isLoading = false;
         state.contacts = payload;
       })
-      .addCase(getContactsThunk.rejected, (state, { error }) => {
-        state.isLoading = false;
-        state.error = error;
-      })
+      .addMatcher(
+        (action) => action.type.endsWith("rejected"),
+        (state, { error }) => {
+          state.isLoading = false;
+          state.error = error;
+        }
+      )
       .addMatcher(
         (action) => action.type.endsWith("pending"),
         (state) => {
