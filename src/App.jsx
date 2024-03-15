@@ -5,12 +5,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getContactsThunk } from "./store/Slice/contactsSlice";
 
-import { getError, getIsLoading } from "./store/selectors";
+import { getContacts, getError, getIsLoading } from "./store/selectors";
 import LoaderExampleText from "./Loaders/LoaderExampleText";
 
 export const App = () => {
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,6 +44,12 @@ export const App = () => {
           />
           {error.length > 0 && <p>{error}</p>}
           {isLoading && <LoaderExampleText />}
+          {!isLoading && error.length < 1 && contacts.length < 1 && (
+            <p>
+              There are no contacts yet, you can add a new contact in the form
+              above 😊
+            </p>
+          )}
           {!isLoading && error.length < 1 && <ContactRender />}
         </div>
       </div>
