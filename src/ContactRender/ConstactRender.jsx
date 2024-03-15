@@ -15,7 +15,6 @@ export const ContactRender = () => {
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    console.log("elID", id);
     dispatch(deleteContactThunk(id));
     setTimeout(() => {
       dispatch(getContactsThunk());
