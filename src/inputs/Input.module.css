@@ -1,8 +1,13 @@
 .input {
-  display: block;
-  margin-top: 10px;
+  width: 60%;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 .label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
   font-weight: 500;
 }

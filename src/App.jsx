@@ -19,39 +19,22 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <div
-      style={{
-        margin: 50,
-      }}
-    >
-      <div>
-        <h1>Phonebook</h1>
-        <Form />
-      </div>
-      <div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <h2>Contacts</h2>
-          <Input
-            type={"text"}
-            name={"filter"}
-            label={"Find contacts by name"}
-          />
-          {error.length > 0 && <p>{error}</p>}
-          {isLoading && <LoaderExampleText />}
-          {!isLoading && error.length < 1 && contacts.length < 1 && (
-            <p>
-              There are no contacts yet, you can add a new contact in the form
-              above 😊
-            </p>
-          )}
-          {!isLoading && error.length < 1 && <ContactRender />}
-        </div>
+    <div className="container">
+      <h1>Phonebook</h1>
+      <Form />
+
+      <div className="contacts-box">
+        <h2>Contacts</h2>
+        <Input type={"text"} name={"filter"} label={"Find contacts by name"} />
+        {error.length > 0 && <p>{error}</p>}
+        {isLoading && <LoaderExampleText />}
+        {!isLoading && error.length < 1 && contacts.length < 1 && (
+          <p>
+            There are no contacts yet, you can add a new contact in the form
+            above 😊
+          </p>
+        )}
+        {!isLoading && error.length < 1 && <ContactRender />}
       </div>
     </div>
   );

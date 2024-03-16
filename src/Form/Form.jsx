@@ -47,20 +47,28 @@ export const Form = () => {
   const { form, submit } = css;
   return (
     <form onSubmit={handleSubmit} autoComplete="off" className={form}>
-      <input
-        onChange={handleChangeName}
-        type={"text"}
-        name={"name"}
-        label={"Name"}
-        required
-      />
-      <input
-        onChange={handleChangeNumber}
-        type={"tel"}
-        name={"number"}
-        label={"Number"}
-        required
-      />
+      <label>
+        Name
+        <input
+          id="name"
+          onChange={handleChangeName}
+          type={"text"}
+          name={"name"}
+          label={"Name"}
+          required
+        />
+      </label>
+      <label>
+        Number
+        <input
+          onChange={handleChangeNumber}
+          type={"tel"}
+          name={"number"}
+          label={"Number"}
+          required
+        />
+      </label>
+
       <button type="submit" className={submit}>
         Add contact
       </button>
