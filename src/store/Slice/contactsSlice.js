@@ -5,10 +5,18 @@ import {
   postApiContact,
 } from "../../Api/api";
 
-export const getContactsThunk = createAsyncThunk("AllContacts", async () => {
-  const data = await getApiContacts();
-  return data;
-});
+export const getContactsThunk = createAsyncThunk(
+  "AllContacts",
+  async (_, thunkAPI) => {
+    try {
+      const data = await getApiContacts();
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const postContactThunk = createAsyncThunk("addContact", async (data) => {
   postApiContact(data);
 });
@@ -35,9 +43,9 @@ const contactsSlice = createSlice({
       })
       .addMatcher(
         (action) => action.type.endsWith("rejected"),
-        (state, { error }) => {
+        (state, { payload }) => {
           state.isLoading = false;
-          state.error = error;
+          state.error = payload.message;
         }
       )
       .addMatcher(
