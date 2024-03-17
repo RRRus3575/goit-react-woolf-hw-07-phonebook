@@ -15,8 +15,9 @@ export const postApiContact = async (data) => {
   });
 };
 export const deleteApiContact = async (id) => {
-  return axios({
+  const { data } = await axios({
     method: "delete",
     url: `${URL}contacts/${id}`,
   });
+  return data;
 };

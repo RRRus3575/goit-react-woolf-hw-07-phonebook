@@ -29,6 +29,7 @@ export const deleteContactThunk = createAsyncThunk(
   "deleteContact",
   async (id) => {
     const data = await deleteApiContact(id);
+    console.log(data);
     return data;
   }
 );
@@ -49,9 +50,7 @@ const contactsSlice = createSlice({
 
       .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.contacts = state.contacts.filter(
-          (el) => el.id !== payload.data.id
-        );
+        state.contacts = state.contacts.filter((el) => el.id !== payload.id);
       })
       .addCase(addContact.fulfilled, (state, { payload }) => {
         state.contacts = [...state.contacts, payload];
