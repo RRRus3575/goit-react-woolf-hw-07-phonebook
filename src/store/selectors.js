@@ -8,6 +8,7 @@ export const contactsSelector = createSelector(
   getContacts,
   getFilter,
   (contacts, filter) => {
+    console.log("selector contacts", contacts);
     const cont = contacts.filter((el) =>
       el.name.toLowerCase().includes(filter.toLowerCase())
     );

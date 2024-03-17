@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./Form.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getContacts } from "../store/selectors";
 import {
+  addContact,
   getContactsThunk,
   postContactThunk,
 } from "../store/Slice/contactsSlice";
@@ -36,12 +37,14 @@ export const Form = () => {
         number: number,
       })
     );
+    dispatch(
+      addContact({
+        name: name,
+        number: number,
+      })
+    );
 
     e.target.reset();
-
-    setTimeout(() => {
-      dispatch(getContactsThunk());
-    }, 1000);
   };
 
   const { form, submit } = css;
