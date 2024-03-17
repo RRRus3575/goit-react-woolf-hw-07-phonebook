@@ -24,12 +24,16 @@ export const addContact = createAsyncThunk("addContactStore", (data) => {
   console.log("addData", data);
   return data;
 });
-export const deleteContact = createAsyncThunk("deleteContactState", (id) => {
-  return id;
-});
-export const deleteContactThunk = createAsyncThunk("deleteContact", (id) => {
-  deleteApiContact(id);
-});
+// export const deleteContact = createAsyncThunk("deleteContactState", (id) => {
+//   return id;
+// });
+export const deleteContactThunk = createAsyncThunk(
+  "deleteContact",
+  async (id) => {
+    const data = await deleteApiContact(id);
+    return data;
+  }
+);
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -44,11 +48,10 @@ const contactsSlice = createSlice({
         state.isLoading = false;
         state.contacts = payload;
       })
-      .addCase(deleteContactThunk.fulfilled, (state) => {
+
+      .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-      })
-      .addCase(deleteContact.fulfilled, (state, { payload }) => {
-        state.contacts = state.contacts.filter((el) => el.id !== payload);
+        state.contacts = state.contacts.filter((el) => el.id !== payload.id);
       })
       .addCase(addContact.fulfilled, (state, { payload }) => {
         state.contacts = [...state.contacts, payload];
