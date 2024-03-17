@@ -18,15 +18,9 @@ export const getContactsThunk = createAsyncThunk(
   }
 );
 export const postContactThunk = createAsyncThunk("addContact", async (data) => {
-  await postApiContact(data);
+  return await postApiContact(data);
 });
-export const addContact = createAsyncThunk("addContactStore", (data) => {
-  console.log("addData", data);
-  return data;
-});
-// export const deleteContact = createAsyncThunk("deleteContactState", (id) => {
-//   return id;
-// });
+
 export const deleteContactThunk = createAsyncThunk(
   "deleteContact",
   async (id) => {
@@ -53,10 +47,9 @@ const contactsSlice = createSlice({
         state.isLoading = false;
         state.contacts = state.contacts.filter((el) => el.id !== payload.id);
       })
-      .addCase(addContact.fulfilled, (state, { payload }) => {
+
+      .addCase(postContactThunk.fulfilled, (state, { payload }) => {
         state.contacts = [...state.contacts, payload];
-      })
-      .addCase(postContactThunk.fulfilled, (state) => {
         state.isLoading = false;
       })
       .addMatcher(
