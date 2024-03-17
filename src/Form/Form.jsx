@@ -32,14 +32,21 @@ export const Form = () => {
       alert(`${name} is alredy in contacts`);
       return;
     }
+    console.log("id", [contacts.length - 1].id);
     dispatch(
       postContactThunk({
-        id: nanoid(),
+        id: [contacts.length - 1].id + 1 || 1,
         name: name,
         number: number,
       })
     );
-    dispatch(getContactsThunk());
+    dispatch(
+      addContact({
+        id: [contacts.length - 1].id + 1 || 1,
+        name: name,
+        number: number,
+      })
+    );
 
     e.target.reset();
   };
