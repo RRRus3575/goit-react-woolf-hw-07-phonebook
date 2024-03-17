@@ -8,14 +8,14 @@ export const getApiContacts = async () => {
 };
 
 export const postApiContact = async (data) => {
-  axios({
+  return axios({
     method: "post",
     url: `${URL}contacts`,
     data,
   });
 };
 export const deleteApiContact = async (id) => {
-  axios({
+  return axios({
     method: "delete",
     url: `${URL}contacts/${id}`,
   });

@@ -3,7 +3,11 @@ import css from "./Form.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getContacts } from "../store/selectors";
-import { postContactThunk } from "../store/Slice/contactsSlice";
+import {
+  addContact,
+  getContactsThunk,
+  postContactThunk,
+} from "../store/Slice/contactsSlice";
 import { nanoid } from "@reduxjs/toolkit";
 
 export const Form = () => {
@@ -31,6 +35,13 @@ export const Form = () => {
     console.log("id", [contacts.length - 1].id);
     dispatch(
       postContactThunk({
+        id: [contacts.length - 1].id + 1 || 1,
+        name: name,
+        number: number,
+      })
+    );
+    dispatch(
+      addContact({
         id: [contacts.length - 1].id + 1 || 1,
         name: name,
         number: number,
