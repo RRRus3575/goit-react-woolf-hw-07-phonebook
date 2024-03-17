@@ -8,6 +8,7 @@ import {
   getContactsThunk,
   postContactThunk,
 } from "../store/Slice/contactsSlice";
+import { nanoid } from "@reduxjs/toolkit";
 
 export const Form = () => {
   const [name, setName] = useState("");
@@ -33,16 +34,12 @@ export const Form = () => {
     }
     dispatch(
       postContactThunk({
+        id: nanoid(),
         name: name,
         number: number,
       })
     );
-    dispatch(
-      addContact({
-        name: name,
-        number: number,
-      })
-    );
+    dispatch(getContactsThunk());
 
     e.target.reset();
   };
