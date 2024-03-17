@@ -15,6 +15,7 @@ export const ContactRender = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteContactThunk(id));
+
     setTimeout(() => {
       dispatch(getContactsThunk());
     }, 1000);

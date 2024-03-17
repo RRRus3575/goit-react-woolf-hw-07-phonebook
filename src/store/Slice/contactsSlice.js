@@ -10,7 +10,7 @@ export const getContactsThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const data = await getApiContacts();
-
+      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -18,15 +18,12 @@ export const getContactsThunk = createAsyncThunk(
   }
 );
 export const postContactThunk = createAsyncThunk("addContact", async (data) => {
-  postApiContact(data);
+  await postApiContact(data);
 });
 
-export const deleteContactThunk = createAsyncThunk(
-  "deleteContact",
-  async (id) => {
-    deleteApiContact(id);
-  }
-);
+export const deleteContactThunk = createAsyncThunk("deleteContact", (id) => {
+  deleteApiContact(id);
+});
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -40,6 +37,12 @@ const contactsSlice = createSlice({
       .addCase(getContactsThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.contacts = payload;
+      })
+      .addCase(deleteContactThunk.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(postContactThunk.fulfilled, (state) => {
+        state.isLoading = false;
       })
       .addMatcher(
         (action) => action.type.endsWith("rejected"),
