@@ -3,12 +3,7 @@ import css from "./Form.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getContacts } from "../store/selectors";
-import {
-  addContact,
-  getContactsThunk,
-  postContactThunk,
-} from "../store/Slice/contactsSlice";
-import { nanoid } from "@reduxjs/toolkit";
+import { postContactThunk } from "../store/Slice/contactsSlice";
 
 export const Form = () => {
   const [name, setName] = useState("");
@@ -32,17 +27,9 @@ export const Form = () => {
       alert(`${name} is alredy in contacts`);
       return;
     }
-    console.log("id", [contacts.length - 1].id);
+
     dispatch(
       postContactThunk({
-        id: [contacts.length - 1].id + 1 || 1,
-        name: name,
-        number: number,
-      })
-    );
-    dispatch(
-      addContact({
-        id: [contacts.length - 1].id + 1 || 1,
         name: name,
         number: number,
       })
